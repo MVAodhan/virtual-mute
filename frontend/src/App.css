@@ -1,0 +1,21 @@
+#app {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.result {
+    height: 20px;
+    line-height: 20px;
+    margin: 1.5rem auto;
+}
+
+.mute-btn{
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.mute-icon{
+    background-color: transparent;
+}

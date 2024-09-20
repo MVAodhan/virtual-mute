@@ -2,19 +2,36 @@ html{
     background-color: rgba(0, 0, 0, 0);
 }
 
-#menu{
-    width: 100vw;
-    --wails-draggable:drag;
-    cursor: move;
-}
 
 #app {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    
+    --wails-draggable:drag;
 }
 
+#menu{
+    width: 100vw;
+    display: flex;
+}
+
+#menu-left{
+    width: 50%;
+    display: flex;
+}
+#menu-right{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+}
+
+#settings-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    cursor: pointer;
+}
 .mute-btn{
     background-color: transparent;
     cursor: pointer;
@@ -23,4 +40,8 @@ html{
 
 .mute-icon{
     background-color: transparent;
+}
+
+#inputs input{
+    width: 25%;
 }

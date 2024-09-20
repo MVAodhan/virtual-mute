@@ -6,6 +6,7 @@ import (
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
 //go:embed all:frontend/dist
@@ -18,18 +19,23 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:       "virtual-mute",
-		Width:       100,
-		Height:      100,
+		Width:       290,
+		Height:      150,
 		AlwaysOnTop: true,
 
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
-		OnStartup:        app.startup,
+
+		OnStartup: app.startup,
 		Bind: []interface{}{
 			app,
 		},
+		Windows: &windows.Options{
+			WindowIsTranslucent:  true,
+			WebviewIsTransparent: true,
+		},
+		Frameless: true,
 	})
 
 	if err != nil {

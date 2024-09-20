@@ -1,13 +1,18 @@
+html{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#menu{
+    width: 100vw;
+    --wails-draggable:drag;
+    cursor: move;
+}
+
 #app {
     height: 100vh;
     display: flex;
-    justify-content: center;
-}
-
-.result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
+    flex-direction: column;
+    
 }
 
 .mute-btn{

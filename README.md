@@ -3,13 +3,14 @@
 ## Requirements
 
 #### GCC
-    - Windows https://code.visualstudio.com/docs/cpp/config-mingw (no need to install VSCode or the extension)
-    - Mac can be found here https://github.com/go-vgo/robotgo
+    
+- Windows https://code.visualstudio.com/docs/cpp/config-mingw (no need to install VSCode or the extension)
+- Mac can be found here https://github.com/go-vgo/robotgo
 
-
-## About
 
 **Right Now Virtual-Mute has only been tested to work on windows.**
+
+## About
 
 Virtual-Mute is a small and simple accessability utility desktop app.
 

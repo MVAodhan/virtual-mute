@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	"log"
-	// _ "github.com/go-vgo/robotgo"
+
+	"github.com/go-vgo/robotgo"
 )
 
 // App struct
@@ -36,11 +37,10 @@ func (a *App) startup(ctx context.Context) {
 func (a *App) ToggleShortcut(key string, shift, ctrl bool) {
 
 	if shift && ctrl {
-		log.Println("Shortcut:", "d", "Shift", "Ctrl")
+		robotgo.KeyTap(key, "ctrl", "shift")
 	} else {
 		log.Println("Shortcut:", "d")
 
 	}
 
-	// robotgo.KeyTap(key, args...)
 }

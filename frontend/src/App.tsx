@@ -17,9 +17,8 @@ function App() {
     console.log(shortcuts);
   }, [showSettings]);
 
-  function toggleShortcut() {
-    ToggleShortcut("d", false, false);
-    ToggleShortcut("d", true, true);
+  function toggleShortcut(shortcut: Shortcut) {
+    ToggleShortcut(shortcut.keyValue, shortcut.ctrl, shortcut.shift);
   }
 
   return (
@@ -52,7 +51,7 @@ function App() {
       </div>
       <div id="shortcut-bar">
         {shortcuts.map((shortcut) => (
-          <button onClick={toggleShortcut} key={shortcut.id}>
+          <button onClick={() => toggleShortcut(shortcut)} key={shortcut.id}>
             {shortcut.id}
           </button>
         ))}
@@ -92,7 +91,8 @@ function App() {
                 const shortcut: Shortcut = {
                   id: shortcuts.length + 1,
                   keyValue: "",
-                  args: [],
+                  ctrl: true,
+                  shift: true,
                 };
 
                 setShortcuts([...shortcuts, shortcut]);
@@ -110,7 +110,6 @@ function App() {
             <Setting
               key={shortcut.id}
               id={shortcut.id}
-              args={shortcut.args}
               keyValue={shortcut.keyValue}
               shortcut={shortcut}
               shortcuts={shortcuts}

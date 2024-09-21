@@ -20,7 +20,9 @@ const Setting = ({
   const edit = () => {
     const index = shortcuts.findIndex((shortcut) => shortcut.id === id);
     const item = shortcuts[index];
-    item.keyValue = keyRef.current?.value;
+
+    item.keyValue = keyRef.current?.value as string;
+
     if (argOne.current?.value) {
       item.args.push(argOne.current?.value);
     }

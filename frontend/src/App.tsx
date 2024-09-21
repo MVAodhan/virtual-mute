@@ -1,23 +1,26 @@
 import "./App.css";
-import { ToggleMute } from "../wailsjs/go/main/App";
+
 import unmuted from "./assets/PhMicrophone.svg";
 import mutedIcon from "./assets/PhMicrophoneSlash.svg";
 import { useEffect, useState } from "react";
 import Setting from "./components/Setting";
 import { Shortcut } from "./types";
 
+import { ToggleShortcut } from "../wailsjs/go/main/App";
+
 function App() {
   const [muted, setMuted] = useState<Boolean>(false);
   const [showSettings, setShowSettings] = useState(false);
   const [shortcuts, setShortcuts] = useState<Shortcut[]>([]);
-  function toggleMute() {
-    ToggleMute();
-    setMuted((prev) => !prev);
-  }
 
   useEffect(() => {
     console.log(shortcuts);
   }, [showSettings]);
+
+  function toggleShortcut() {
+    ToggleShortcut("d", false, false);
+    ToggleShortcut("d", true, true);
+  }
 
   return (
     <div id="app">
@@ -47,7 +50,14 @@ function App() {
         </div>
         <div id="menu-right">Right</div>
       </div>
-      <div onClick={toggleMute} className="mute-btn">
+      <div id="shortcut-bar">
+        {shortcuts.map((shortcut) => (
+          <button onClick={toggleShortcut} key={shortcut.id}>
+            {shortcut.id}
+          </button>
+        ))}
+      </div>
+      {/* <div onClick={toggleMute} className="mute-btn">
         {!muted && (
           <img
             src={unmuted}
@@ -66,10 +76,16 @@ function App() {
             className="mute-icon"
           />
         )}
-      </div>
+      </div> */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         {showSettings && (
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "5px",
+            }}
+          >
             <span>Settings</span>
             <button
               onClick={() => {

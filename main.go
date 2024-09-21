@@ -19,8 +19,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:       "virtual-deck",
-		Width:       290,
-		Height:      150,
+		Width:       380,
+		Height:      170,
 		AlwaysOnTop: true,
 
 		AssetServer: &assetserver.Options{

@@ -2,9 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
-
-	"github.com/go-vgo/robotgo"
+	"log"
+	// _ "github.com/go-vgo/robotgo"
 )
 
 // App struct
@@ -23,11 +22,25 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
-}
+// func (a *App) ToggleShortcut(key string, ctrl, shift bool) {
 
-func (a *App) ToggleMute() {
-	robotgo.KeyTap("d", "ctrl", "shift")
+// 	if ctrl == true && shift == true {
+// 		log.Printf("Shortcut: %v Ctrl Shift", key)
+// 	} else {
+// 		log.Printf("Shortcut: %v", key)
+
+// 	}
+
+//		// robotgo.KeyTap(key, args...)
+//	}
+func (a *App) ToggleShortcut(key string, shift, ctrl bool) {
+
+	if shift && ctrl {
+		log.Println("Shortcut:", "d", "Shift", "Ctrl")
+	} else {
+		log.Println("Shortcut:", "d")
+
+	}
+
+	// robotgo.KeyTap(key, args...)
 }

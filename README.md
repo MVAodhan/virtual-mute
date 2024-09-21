@@ -1,19 +1,29 @@
 # README
 
+## Requirements
+
+#### GCC
+    - Windows https://code.visualstudio.com/docs/cpp/config-mingw (no need to install VSCode or the extension)
+    - Mac can be found here https://github.com/go-vgo/robotgo
+
+
 ## About
 
-This is the official Wails React-TS template.
+**Right Now Virtual-Mute has only been tested to work on windows.**
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+Virtual-Mute is a small and simple accessability utility desktop app.
 
-## Live Development
+You can set custom shortcuts in the UI to easily trigger them from the GUI
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+*Settings Icon > Add Shortcute*
 
-## Building
+ - The first field is the key
+ - The Second is a checkBox for Ctrl 
+ - The Third is a checkBox for Shift 
 
-To build a redistributable, production mode package, use `wails build`.
+You'll need to set up your shortcut of choice in the platform.
+
+e.g Discord : Settings > Keybinds set the action to Toggle Mute and Keybind the same as the one you set up in Virtual-Mute
+
+
+

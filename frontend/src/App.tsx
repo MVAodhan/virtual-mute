@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 import Setting from "./components/Setting";
 import { Shortcut } from "./types";
 
-import { ReadJson, ToggleShortcut } from "../wailsjs/go/main/App";
+import {
+  ReadJson,
+  ToggleShortcut,
+  CheckShortcuts,
+  AppendShortcut,
+} from "../wailsjs/go/main/App";
 
 function App() {
   const [muted, setMuted] = useState<Boolean>(false);
@@ -14,10 +19,13 @@ function App() {
   const [shortcuts, setShortcuts] = useState<Shortcut[]>([]);
 
   async function readShortCuts() {
-    const shortcuts = await ReadJson();
+    // const shortcuts = await ReadJson();
+    // console.log(shortcuts);
+
+    const shortcuts = await CheckShortcuts();
     console.log(shortcuts);
   }
-  useEffect(() => {}, []);
+
   useEffect(() => {
     console.log(shortcuts);
   }, [showSettings]);
@@ -82,6 +90,7 @@ function App() {
         )}
       </div> */}
       <button onClick={() => readShortCuts()}>Read</button>
+      <button onClick={() => AppendShortcut()}>Append</button>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {showSettings && (
           <div

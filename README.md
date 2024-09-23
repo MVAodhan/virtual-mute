@@ -3,8 +3,9 @@
 ## Requirements
 
 #### GCC
-    - Windows https://code.visualstudio.com/docs/cpp/config-mingw (no need to install VSCode or the extension)
-    - Mac can be found here https://github.com/go-vgo/robotgo
+    
+- Windows https://code.visualstudio.com/docs/cpp/config-mingw (no need to install VSCode or the extension)
+- Mac can be found here https://github.com/go-vgo/robotgo
 
 
 ## About

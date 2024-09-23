@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"log"
 	"os"
@@ -40,16 +41,9 @@ func (a *App) ToggleShortcut(key string, shift, ctrl bool) {
 	}
 }
 
-func (a *App) ReadJson() []Shortcut {
+func (a *App) ReadJson(pathToRead string) []Shortcut {
 
-	curDir, err := os.Getwd()
-	if err != nil {
-		log.Panic(err)
-	}
-
-	shortcutsPath := curDir + "\\frontend\\dist\\assets"
-
-	byteValue, err := os.ReadFile(shortcutsPath + "\\shortcuts.json")
+	byteValue, err := os.ReadFile(pathToRead)
 
 	if err != nil {
 		log.Printf("cant read file : %s", err)
@@ -68,4 +62,33 @@ func (a *App) ReadJson() []Shortcut {
 	// fmt.Println(shortcuts)
 
 	return shortcuts
+}
+
+func (a *App) CheckShortcuts() []Shortcut {
+	homeDir, _ := os.UserHomeDir()
+
+	shortcutsPath := homeDir + "\\shortcuts.json"
+
+	info, err := os.Stat(shortcutsPath)
+
+	if err != nil {
+		fileExists := os.IsNotExist(err)
+		log.Println(fileExists, "file does not exists")
+		return nil
+	} else {
+		log.Println(info)
+	}
+
+	shortcuts := a.ReadJson(shortcutsPath)
+
+	return shortcuts
+}
+
+func (a *App) AppendShortcut() {
+
+	shortcuts := a.CheckShortcuts()
+	fmt.Println(shortcuts)
+	shortcuts = append(shortcuts, Shortcut{ID: 2, KeyValue: "F", Ctrl: true, Shift: true})
+	fmt.Println(shortcuts)
+
 }

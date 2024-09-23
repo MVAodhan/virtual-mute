@@ -3,7 +3,6 @@ import { Shortcut } from "../types";
 const Setting = ({
   id,
   keyValue,
-
   shortcut,
   shortcuts,
 }: {

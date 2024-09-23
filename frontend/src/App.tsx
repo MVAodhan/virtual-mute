@@ -23,9 +23,13 @@ function App() {
     // console.log(shortcuts);
 
     const shortcuts = await CheckShortcuts();
-    console.log(shortcuts);
+
+    setShortcuts(shortcuts);
   }
 
+  useEffect(() => {
+    readShortCuts();
+  }, []);
   useEffect(() => {
     console.log(shortcuts);
   }, [showSettings]);
@@ -69,6 +73,7 @@ function App() {
           </button>
         ))}
       </div>
+      <button onClick={() => AppendShortcut()}>Append</button>
       {/* <div onClick={toggleMute} className="mute-btn">
         {!muted && (
           <img
@@ -89,8 +94,6 @@ function App() {
           />
         )}
       </div> */}
-      <button onClick={() => readShortCuts()}>Read</button>
-      <button onClick={() => AppendShortcut()}>Append</button>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {showSettings && (
           <div

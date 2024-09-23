@@ -86,9 +86,22 @@ func (a *App) CheckShortcuts() []Shortcut {
 
 func (a *App) AppendShortcut() {
 
+	homeDir, _ := os.UserHomeDir()
+
+	shortcutsPath := homeDir + "\\shortcuts.json"
+
 	shortcuts := a.CheckShortcuts()
-	fmt.Println(shortcuts)
+
 	shortcuts = append(shortcuts, Shortcut{ID: 2, KeyValue: "F", Ctrl: true, Shift: true})
-	fmt.Println(shortcuts)
+
+	jsonBytes, err := json.Marshal(shortcuts)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = os.WriteFile(shortcutsPath, jsonBytes, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }

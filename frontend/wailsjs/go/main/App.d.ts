@@ -8,4 +8,6 @@ export function CheckShortcuts():Promise<Array<main.Shortcut>>;
 
 export function ReadJson(arg1:string):Promise<Array<main.Shortcut>>;
 
+export function RemoveByID(arg1:number):Promise<Array<main.Shortcut>>;
+
 export function ToggleShortcut(arg1:string,arg2:boolean,arg3:boolean):Promise<void>;

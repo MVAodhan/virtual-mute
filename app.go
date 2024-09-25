@@ -105,3 +105,16 @@ func (a *App) AppendShortcut() {
 	}
 
 }
+
+func (a *App) RemoveByID(idToRemove int) []Shortcut {
+	shortcuts := a.CheckShortcuts()
+
+	var newShortcuts []Shortcut
+	for _, shortcut := range shortcuts {
+		if shortcut.ID != idToRemove {
+			newShortcuts = append(newShortcuts, shortcut)
+		}
+	}
+	return newShortcuts
+
+}

@@ -7,10 +7,10 @@ import Setting from "./components/Setting";
 import { Shortcut } from "./types";
 
 import {
-  ReadJson,
   ToggleShortcut,
   CheckShortcuts,
   AppendShortcut,
+  RemoveByID,
 } from "../wailsjs/go/main/App";
 
 function App() {
@@ -26,10 +26,10 @@ function App() {
 
     setShortcuts(shortcuts);
   }
-
-  useEffect(() => {
-    readShortCuts();
-  }, []);
+  // Disabled while trying to get friends to build for mac
+  // useEffect(() => {
+  //   readShortCuts();
+  // }, []);
   useEffect(() => {
     console.log(shortcuts);
   }, [showSettings]);
@@ -74,26 +74,15 @@ function App() {
         ))}
       </div>
       <button onClick={() => AppendShortcut()}>Append</button>
-      {/* <div onClick={toggleMute} className="mute-btn">
-        {!muted && (
-          <img
-            src={unmuted}
-            alt="mute icon"
-            width="32"
-            height="32"
-            className="mute-icon"
-          />
-        )}
-        {muted && (
-          <img
-            src={mutedIcon}
-            alt="mute icon"
-            width="32"
-            height="32"
-            className="mute-icon"
-          />
-        )}
-      </div> */}
+      <button
+        onClick={async () => {
+          const shortcuts = await RemoveByID(2);
+          console.log(shortcuts);
+        }}
+      >
+        Remove ID 2
+      </button>
+
       <div style={{ display: "flex", flexDirection: "column" }}>
         {showSettings && (
           <div

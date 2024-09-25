@@ -14,6 +14,10 @@ export function ReadJson(arg1) {
   return window['go']['main']['App']['ReadJson'](arg1);
 }
 
+export function RemoveByID(arg1) {
+  return window['go']['main']['App']['RemoveByID'](arg1);
+}
+
 export function ToggleShortcut(arg1, arg2, arg3) {
   return window['go']['main']['App']['ToggleShortcut'](arg1, arg2, arg3);
 }

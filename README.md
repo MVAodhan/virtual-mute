@@ -47,6 +47,6 @@ Wails requires that the xcode command line tools are installed. This can be done
 ## Project build instructions 
 
 - Clone the repo
-- Run wails build
+- Run ```wails build```
 
 *Refer to bin/README.md for more build output details*

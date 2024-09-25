@@ -38,11 +38,11 @@ Wails has a number of common dependencies that are required before installation:
 
 #### Windows
    
-    Wails requires that the WebView2 runtime is installed. Some Windows installations will already have this installed. You can check using the ```wails doctor``` command.
+Wails requires that the WebView2 runtime is installed. Some Windows installations will already have this installed. You can check using the ```wails doctor``` command.
 
 #### Mac
 
-    Wails requires that the xcode command line tools are installed. This can be done by running ```xcode-select --install```.
+Wails requires that the xcode command line tools are installed. This can be done by running ```xcode-select --install```.
 
 ## Project build instructions 
 

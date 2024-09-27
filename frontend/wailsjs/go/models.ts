@@ -1,7 +1,7 @@
 export namespace main {
 	
 	export class Shortcut {
-	    id: number;
+	    id: string;
 	    keyValue: string;
 	    ctrl: boolean;
 	    shift: boolean;

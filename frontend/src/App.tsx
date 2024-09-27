@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import Setting from "./components/Setting";
 import { Shortcut } from "./types";
 
+import { v4 as uuidv4 } from "uuid";
+
 import {
   ToggleShortcut,
   CheckShortcuts,
   AppendShortcut,
-  RemoveByID,
+  ReadJson,
 } from "../wailsjs/go/main/App";
 
 function App() {
@@ -19,20 +21,18 @@ function App() {
   const [shortcuts, setShortcuts] = useState<Shortcut[]>([]);
 
   async function readShortCuts() {
-    // const shortcuts = await ReadJson();
-    // console.log(shortcuts);
-
-    const shortcuts = await CheckShortcuts();
+    const shortcuts = await ReadJson();
 
     setShortcuts(shortcuts);
   }
-  // Disabled while trying to get friends to build for mac
-  // useEffect(() => {
-  //   readShortCuts();
-  // }, []);
+
+  async function append() {
+    await AppendShortcut(shortcuts);
+  }
+
   useEffect(() => {
-    console.log(shortcuts);
-  }, [showSettings]);
+    readShortCuts();
+  }, []);
 
   function toggleShortcut(shortcut: Shortcut) {
     ToggleShortcut(shortcut.keyValue, shortcut.ctrl, shortcut.shift);
@@ -64,26 +64,36 @@ function App() {
             </svg>
           </div>
         </div>
-        <div id="menu-right">Right</div>
+        <div id="menu-right">
+          <div onClick={() => window.runtime.Quit()} className="close-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 256 256"
+            >
+              <path
+                fill="#888888"
+                d="M208 34H48a14 14 0 0 0-14 14v160a14 14 0 0 0 14 14h160a14 14 0 0 0 14-14V48a14 14 0 0 0-14-14m2 174a2 2 0 0 1-2 2H48a2 2 0 0 1-2-2V48a2 2 0 0 1 2-2h160a2 2 0 0 1 2 2Zm-45.76-107.76L136.48 128l27.76 27.76a6 6 0 1 1-8.48 8.48L128 136.48l-27.76 27.76a6 6 0 0 1-8.48-8.48L119.52 128l-27.76-27.76a6 6 0 0 1 8.48-8.48L128 119.52l27.76-27.76a6 6 0 0 1 8.48 8.48"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
       <div id="shortcut-bar">
         {shortcuts.map((shortcut) => (
-          <button onClick={() => toggleShortcut(shortcut)} key={shortcut.id}>
-            {shortcut.id}
+          <button
+            className="border rounded-full"
+            id="action-btn"
+            onClick={() => toggleShortcut(shortcut)}
+            key={shortcut.id}
+          >
+            S
           </button>
         ))}
       </div>
-      <button onClick={() => AppendShortcut()}>Append</button>
-      <button
-        onClick={async () => {
-          const shortcuts = await RemoveByID(2);
-          console.log(shortcuts);
-        }}
-      >
-        Remove ID 2
-      </button>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="flex flex-col items-center">
         {showSettings && (
           <div
             style={{
@@ -92,11 +102,12 @@ function App() {
               marginTop: "5px",
             }}
           >
-            <span>Settings</span>
+            <h2 className="text-xl font-semibold mt-2">Settings</h2>
             <button
+              className="border rounded-md px-5 mb-5 mt-2"
               onClick={() => {
                 const shortcut: Shortcut = {
-                  id: shortcuts.length + 1,
+                  id: uuidv4(),
                   keyValue: "",
                   ctrl: true,
                   shift: true,
@@ -107,24 +118,42 @@ function App() {
             >
               Add Shortcut
             </button>
+            {shortcuts.length > 0 && (
+              <>
+                {shortcuts.map((shortcut) => (
+                  <Setting
+                    key={shortcut.id}
+                    id={shortcut.id}
+                    keyValue={shortcut.keyValue}
+                    shortcut={shortcut}
+                    shortcuts={shortcuts}
+                    setShortcuts={setShortcuts}
+                  />
+                ))}
+                <button
+                  className="border rounded-md px-5 mt-5"
+                  onClick={() => append()}
+                >
+                  Save To OS
+                </button>
+              </>
+            )}
           </div>
         )}
-      </div>
-      <div>
-        {showSettings &&
-          shortcuts.length > 0 &&
-          shortcuts.map((shortcut) => (
-            <Setting
-              key={shortcut.id}
-              id={shortcut.id}
-              keyValue={shortcut.keyValue}
-              shortcut={shortcut}
-              shortcuts={shortcuts}
-            />
-          ))}
       </div>
     </div>
   );
 }
 
 export default App;
+
+/**
+ *                <Setting
+                  key={shortcut.id}
+                  id={shortcut.id}
+                  keyValue={shortcut.keyValue}
+                  shortcut={shortcut}
+                  shortcuts={shortcuts}
+                />
+                <button className="border rounded-md px-5 mt-5">Save To OS</button>
+ */
